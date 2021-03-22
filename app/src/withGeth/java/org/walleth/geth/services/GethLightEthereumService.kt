@@ -165,7 +165,7 @@ class GethLightEthereumService : LifecycleService() {
                         syncTick(ethereumNode, ethereumContext)
                     }
 
-                    async(Dispatchers.Main) {
+                    withContext(Dispatchers.Main) {
                         transactionsLiveData.removeObserver(transactionObserver)
                         launch {
                             ethereumNode.stop()
@@ -178,7 +178,7 @@ class GethLightEthereumService : LifecycleService() {
                         } else {
                             notificationManager.cancel(NOTIFICATION_ID_GETH)
                         }
-                    }.await()
+                    }
                 }
             }
 
